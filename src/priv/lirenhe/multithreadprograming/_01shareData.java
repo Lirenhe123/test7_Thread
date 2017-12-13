@@ -30,7 +30,7 @@ public class _01shareData extends Thread{
 		
 		
 		/*
-		 * 测试共享数据，产生线程不安全：一个线程封装成一个对象，这个对象被其他线程是使用
+		 * 测试共享数据，产生线程不安全：一个线程封装成一个对象，这个对象被其他线程使用
 		 */
 		ThreadTest02 theShareThread=new ThreadTest02("shareThread");
 		
