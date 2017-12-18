@@ -9,6 +9,10 @@ import javax.swing.plaf.synth.SynthSpinnerUI;
 //当循环调用该对象时，锁了又打开，导致在n次循环中有其他线程启动使用该对象）
 
 //————从根本上解决同步问题：锁对象的某个变量，使用syn非this
+
+
+//针对syn的同步效果，有三种方法，最彻底的是最后一种，我觉得也是最好的一种。加了syn的三种方式，是锁的粒度不同，锁整个this对象，同步化整个方法，
+//锁整个this对象，同步化部分代码，锁某个公共资源对象，同步化部分代码。注意哦：非syn的方法获部分代码仍然异步
 public class _914syn_notthis_dirtyread {
 	public static void main(String[] args) {
 		_914Task task=new _914Task("A", "B");
