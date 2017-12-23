@@ -7,6 +7,8 @@ package priv.lirenhe.multithreadprograming;
 
 //如果在syn方法中使用出现死循环，那个这个对象的所有方法都无法使用。但是使用syn(Object)由于使用不同的对象，
 //所以死循环出现在一个代码块里而不会影响其他代码块，因为持有不同的对象锁
+
+//书本p163：线程组的初步了解，线程状态的获取和enumerate的使用
 public class _916syn_其它注意 {
 
 }
