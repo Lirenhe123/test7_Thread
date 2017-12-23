@@ -7,6 +7,8 @@ import java.io.PipedOutputStream;
 
 //管道流的核心：1，connect，2，对管道流pipeStream进行线程化
 //当写线程全部写完才会让读线程取数据（是错的）:内部大概是：写到写出流中，如果写出流中的缓冲区满了就输出到读入流中，读入流才择机抢占cpu执行
+
+//一下代码只是管道字节流，字符流同理，就不在研究
 public class _919pipe_thread {
 	public static void main(String[] args) {
 		try {
