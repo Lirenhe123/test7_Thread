@@ -25,10 +25,21 @@ public class _919pipe_thread {
 
 			threadRead.start();
 			threadWrite.start();
-
+			/*
+			//join不能达到while (flag)效果,因为join后的代码会阻塞，不会执行
+			threadRead.join();
+			threadWrite.join();
+			Thread[] threadArray = new Thread[Thread.currentThread().getThreadGroup().activeCount()];
+			Thread.currentThread().getThreadGroup().enumerate(threadArray);
+			for (int i = 0; i < threadArray.length; i++) {
+				System.out.println(threadArray[i].getName() + "-" + threadArray[i].getState());
+			}
+			*/
+			
 			boolean flag = true;
 			//通过分析打印语句，只有当写出一定数据量后才能读入
 			while (flag) {
+				//判断读写线程是否终止，如果都死了，则主线程才执行下面的代码，不可以使用 join（有种同步效果）
 				while (!threadRead.isAlive() && !threadWrite.isAlive()) {
 					flag = false;
 				}
@@ -38,7 +49,7 @@ public class _919pipe_thread {
 					System.out.println(threadArray[i].getName() + "-" + threadArray[i].getState());
 				}
 			}
-
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
