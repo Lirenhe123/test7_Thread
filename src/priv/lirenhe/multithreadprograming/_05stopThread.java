@@ -3,6 +3,7 @@ package priv.lirenhe.multithreadprograming;
 /**
  * 使用异常法和return停止线程
  * 对于其它种情况以后考虑
+ * 结束线程的最优方法http://blog.csdn.net/lexang1/article/details/49819347
  * @author User
  *
  */

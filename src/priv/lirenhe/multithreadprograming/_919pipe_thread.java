@@ -11,12 +11,12 @@ import java.io.PipedOutputStream;
 //一下代码只是管道字节流，字符流同理，就不在研究
 public class _919pipe_thread {
 	public static void main(String[] args) {
+		ReadData readData = new ReadData();
+		WriteData writeData = new WriteData();
+		
+		PipedInputStream pis = new PipedInputStream();
+		PipedOutputStream pos = new PipedOutputStream();
 		try {
-			ReadData readData = new ReadData();
-			WriteData writeData = new WriteData();
-
-			PipedInputStream pis = new PipedInputStream();
-			PipedOutputStream pos = new PipedOutputStream();
 			pis.connect(pos);
 			_919ThreadRead threadRead = new _919ThreadRead(readData, pis);
 			_919ThreadWrite threadWrite = new _919ThreadWrite(writeData, pos);
@@ -50,10 +50,31 @@ public class _919pipe_thread {
 				}
 			}
 			
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
+	}
+}
+
+class DaemonThread extends Thread{
+	@Override
+	public void run() {
+		super.run();
+		for(;;){
+			System.out.println("_919ThreadRead线程仍在执行");
+		}
+	}
+}
+
+class DaemonThread02 extends Thread{
+	@Override
+	public void run() {
+		super.run();
+		for(;;){
+			System.out.println("_919ThreadWrite线程仍在执行");
+		}
 	}
 }
 
@@ -94,7 +115,8 @@ class ReadData {
 		byte[] buffer = new byte[300];
 		BufferedInputStream bis = null;
 		String result = null;
-
+		
+		
 		try {
 			System.out.println("readData:begin");
 			bis = new BufferedInputStream(pis);
@@ -116,6 +138,8 @@ class ReadData {
 				}
 			}
 		}
+		
+		
 	}
 }
 
@@ -123,6 +147,8 @@ class WriteData {
 	public void writeData(PipedOutputStream pos) {
 		String outPutData = null;
 		System.out.println("writeData:start");
+		
+		
 		try {
 			for (int i = 0; i < 300; i++) {
 				outPutData = "_" + (i + 1);
@@ -142,5 +168,6 @@ class WriteData {
 				}
 			}
 		}
+		
 	}
 }

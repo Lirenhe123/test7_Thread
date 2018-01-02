@@ -29,9 +29,9 @@ public class _04currentThread {
 		 * 为什么出现current和this的区别
 		 */
 		ThreadTest05 threadTest05_1=new ThreadTest05();
-		System.out.println("thread isAlive:"+threadTest05_1.isAlive());
+		System.out.println("threadTest05_1 isAlive:"+threadTest05_1.isAlive());
 		threadTest05_1.start();
-		System.out.println("thread isAlive:"+threadTest05_1.isAlive());
+		System.out.println("threadTest05_1 isAlive:"+threadTest05_1.isAlive());
 	}
 }
 
@@ -53,8 +53,9 @@ class ThreadTest05 extends Thread{
 	 * 比较主线程和this线程的区别
 	 */
 	public ThreadTest05(){
-		System.out.println("主线程："+Thread.currentThread().getName()+"isAlive:"+Thread.currentThread().isAlive());
-		System.out.println("this线程："+this.getName()+"isAlive:"+this.isAlive());
+		System.out.println("main线程生成子线程时，main在执行run，整个过程时main线程run，current线程必是活的");
+		System.out.println("main线程就是当前线程"+Thread.currentThread().getName()+"：isAlive:"+Thread.currentThread().isAlive());
+		System.out.println("但是this线程指的是调用isAlive方法所属对象线程"+this.getName()+"：isAlive:"+this.isAlive()+"可能是活的，也可能是死的");
 	}
 	@Override
 	public void run() {
@@ -62,7 +63,8 @@ class ThreadTest05 extends Thread{
 		 * 比较this线程和当前线程的区别
 		 */
 		super.run();
-		System.out.println("this线程"+this.getName()+"isAlive:"+Thread.currentThread().isAlive());
-		System.out.println("当前线程："+Thread.currentThread().getName()+"isAlive:"+Thread.currentThread().isAlive());
+		System.out.println("此时，正在执行子线程，那么当前线程就是该子线程，因为它在run，在run必为活的");
+		System.out.println("所以，当前线程是"+Thread.currentThread().getName()+"：isAlive:"+Thread.currentThread().isAlive());
+		System.out.println("而this线程是调用isAlive方法所属对象线程"+this.getName()+"：isAlive:"+this.isAlive());
 	}
 }

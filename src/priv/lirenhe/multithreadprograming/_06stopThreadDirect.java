@@ -5,8 +5,8 @@ public class _06stopThreadDirect {
 		MyThread01 thread=new MyThread01();
 		System.out.println("启动");
 		thread.start();
-		Thread.sleep(2000);
-		System.out.println("main 在睡眠2秒后使thread中断");
+		Thread.sleep(200);
+		System.out.println("main 在睡眠200毫秒后使thread中断");
 		thread.interrupt();
 		System.out.println("同时，main也终止");
 	}
@@ -19,9 +19,8 @@ class MyThread01 extends Thread{
 			for(int i=0;i<50000;i++){
 				if(this.interrupted()){
 					System.out.println(this.getName()+"停止了");
-					throw new InterruptedException();
+					throw new InterruptedException();//抛出异常后才不会执行for后的语句
 				}
-				Thread.sleep(100);
 				System.out.println("i="+(i+1));
 			}
 			System.out.println("虽然线程已经停止了，但是仍然执行了for循环后面这条语句");
