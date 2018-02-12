@@ -3,6 +3,8 @@ package priv.lirenhe.multithreadprograming;
 
 
 //交叉执行的核心思想：对this对象锁的获取，该参数prevIsA决定了对this锁的获取的优先权
+//在重复思考该代码时想起将大量对象数据存入数据库时可能存在效率低问题：将要存入数据库的大量数据分割成多个对象，生成n个的线程，将这些
+//数据对象分给各个线程，可以将它们用map映射起来，然后处理：线程对各自的数据对象枷锁。
 public class _920wait_notify_insert_test {
 	public static void main(String[] args) {
 		DBTools dbTool = new DBTools();
@@ -14,7 +16,6 @@ public class _920wait_notify_insert_test {
 			threadBackupA.start();
 			threadBackupB.start();
 		}
-				
 	}
 }
 
